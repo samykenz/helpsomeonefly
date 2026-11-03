@@ -55,6 +55,13 @@ a{color:inherit}
 nav{display:flex;align-items:center;justify-content:space-between;height:72px}
 .logo{font:800 1.15rem Inter;letter-spacing:-.01em;text-decoration:none}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--bg);text-decoration:none;font-weight:700;font-size:.92rem;transition:transform .2s,box-shadow .2s}
+.ca-pill{display:inline-flex;align-items:center;gap:12px;min-width:0;max-width:min(460px,64vw);padding:11px 16px;border:1px solid var(--line);border-radius:12px;background:var(--card);backdrop-filter:blur(12px);color:var(--ink2);cursor:pointer;font:inherit;transition:border-color .2s,box-shadow .2s}
+.ca-pill:hover{border-color:color-mix(in srgb,var(--sky) 60%,transparent);box-shadow:0 10px 30px -12px color-mix(in srgb,var(--sky) 60%,transparent)}
+.ca-pill .k{color:var(--sky);flex:none}
+.ca-pill code{font:500 .8rem/1.4 "JetBrains Mono",ui-monospace,monospace;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.ca-pill .cp{color:var(--muted);flex:none;transition:color .2s}
+.ca-pill:hover .cp{color:var(--ink)}
+nav{gap:16px}
 .btn:hover{transform:translateY(-1px);box-shadow:0 10px 30px -8px color-mix(in srgb,var(--sky) 60%,transparent)}
 
 /* hero */
@@ -143,7 +150,7 @@ footer p+p{margin-top:8px}
 <div class="wrap">
   <nav>
     <a class="logo" href="#top" data-cfg="ticker">$ADAM</a>
-    <a class="btn" id="buyBtn" href="#">Buy <span data-cfg="ticker">$ADAM</span></a>
+    <button class="ca-pill" id="navCa" type="button" aria-label="Copy contract address"><span class="mono k">CA</span><code id="navCaAddr">Coming soon</code><span class="mono cp" id="navCopy">Copy</span></button>
   </nav>
 
   <header class="hero" id="top">
@@ -221,8 +228,7 @@ footer p+p{margin-top:8px}
 /* ===================== CONFIG — edit this ===================== */
 const CONFIG = {
   ticker: "$ADAM",
-  buyUrl: "#",                     // pump.fun / DEX link
-  contract: "",                    // token CA
+  contract: "ADAMxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxpump", // PLACEHOLDER: swap for the real token CA
   feeWallet: "",                   // public Solana wallet that receives creator fees
   consent: "",                     // e.g. "Shared with the blessing of the Robinson and Sharp families."
   // Every donation sent. sol = amount, tx = Solana signature, receipt = Wings of Hope receipt link.
@@ -239,16 +245,17 @@ const usd = n => "$" + n.toLocaleString("en-US",{maximumFractionDigits: n < 1000
 const sol = n => n.toLocaleString(undefined,{maximumFractionDigits:3}) + " SOL";
 
 document.querySelectorAll("[data-cfg]").forEach(el => { const v = CONFIG[el.dataset.cfg]; if (v) el.textContent = v; });
-$("buyBtn").href = CONFIG.buyUrl;
-if (CONFIG.contract) $("ca").textContent = CONFIG.contract;
+if (CONFIG.contract) { $("ca").textContent = CONFIG.contract; $("navCaAddr").textContent = CONFIG.contract; }
 if (CONFIG.consent) $("consentLine").textContent = CONFIG.consent;
 if (CONFIG.feeWallet) $("walletLink").href = "https://solscan.io/account/" + CONFIG.feeWallet;
 else $("walletLink").style.display = "none";
-$("copyBtn").onclick = () => {
+function copyCA(label){
   if (!CONFIG.contract) return;
   navigator.clipboard?.writeText(CONFIG.contract);
-  $("copyBtn").textContent = "Copied"; setTimeout(() => $("copyBtn").textContent = "Copy", 1400);
-};
+  label.textContent = "Copied"; setTimeout(() => label.textContent = "Copy", 1400);
+}
+$("copyBtn").onclick = () => copyCA($("copyBtn"));
+$("navCa").onclick = () => copyCA($("navCopy"));
 
 const donatedSol = CONFIG.donations.reduce((s,t) => s + t.sol, 0);
 if (CONFIG.donations.length) {
