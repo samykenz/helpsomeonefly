@@ -5,10 +5,10 @@
 <meta name="theme-color" content="#F4805D">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Help Someone Fly</title>
-<meta name="description" content="A community memorial for Adam, Helen, Emma and Charlie. 100% of creator fees go to ACCESS, the nonprofit that supports families after air disasters. Tracked live on Solana.">
+<meta name="description" content="A community memorial for Adam, Helen, Emma and Charlie. 100% of creator fees are routed to ACCESS, the nonprofit that supports families after air disasters, through pump.fun Charity Coins. Tracked live on Solana.">
 <link rel="canonical" href="https://helpsomeonefly.com/">
 <meta property="og:title" content="Every trade helps a family heal">
-<meta property="og:description" content="100% of creator fees go to ACCESS, grief support for families after air disasters. Tracked live on Solana.">
+<meta property="og:description" content="100% of creator fees are routed to ACCESS, grief support for families after air disasters. Tracked live on Solana.">
 <meta property="og:url" content="https://helpsomeonefly.com/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
@@ -198,8 +198,8 @@ footer .logo{margin-bottom:14px}
         <div>
           <div class="label">In memory of Adam, Helen, Emma &amp; Charlie</div>
           <h1 class="disp">Every trade helps <b>a family heal.</b></h1>
-          <p class="lead">100% of creator fees go to <a href="https://www.accesshelp.org/" target="_blank" rel="noopener">ACCESS</a>, the nonprofit that pairs families who lost loved ones in plane crashes with grief mentors who have lived through the same loss. Tracked live on Solana.</p>
-          <div class="cta"><a class="btn" href="#buy">buy <span data-cfg="ticker">$ADAM</span> ›</a><span>100% of fees donated | every gift posted</span></div>
+          <p class="lead">100% of creator fees are routed to <a href="https://www.accesshelp.org/" target="_blank" rel="noopener">ACCESS</a>, the nonprofit that pairs families who lost loved ones in plane crashes with grief mentors who have lived through the same loss. Tracked live on Solana.</p>
+          <div class="cta"><a class="btn" href="#buy">buy <span data-cfg="ticker">$ADAM</span> ›</a><span>100% of creator fees to ACCESS | claimed on-chain</span></div>
         </div>
       </div>
     </div>
@@ -214,14 +214,14 @@ footer .logo{margin-bottom:14px}
           <span>updated <span id="updated">—</span></span>
         </div>
         <div class="big disp" id="raised">$0.00</div>
-        <div class="big-sub">raised for ACCESS · <b id="totalSol">0 SOL</b> in fees</div>
-        <div class="bar" id="bar" role="img" aria-label="Donated vs waiting to be sent">
+        <div class="big-sub">in creator fees for ACCESS · <b id="totalSol">0 SOL</b> total</div>
+        <div class="bar" id="bar" role="img" aria-label="Claimed by ACCESS vs waiting to be claimed">
           <div class="seg sent" id="segSent"></div>
           <div class="seg pending" id="segPend"></div>
         </div>
         <div class="legend">
-          <span><i class="k-sent"></i>donated <b id="lSent">$0</b></span>
-          <span><i class="k-pend"></i>next donation <b id="lPend">$0</b></span>
+          <span><i class="k-sent"></i>claimed by ACCESS <b id="lSent">$0</b></span>
+          <span><i class="k-pend"></i>waiting to be claimed <b id="lPend">$0</b></span>
         </div>
         <div class="ca">
           <span class="label">CA</span>
@@ -269,11 +269,11 @@ footer .logo{margin-bottom:14px}
 
   <section id="how">
     <div class="label">How it works</div>
-    <h2 class="disp">Trade. Fees build. <em>We donate.</em></h2>
+    <h2 class="disp">Trade. Fees build. <em>ACCESS claims.</em></h2>
     <div class="cards">
-      <div class="card"><div class="n">/ 01</div><h3>Every trade pays a fee</h3><p>Each buy and sell sends a small creator fee to one public wallet.</p></div>
-      <div class="card"><div class="n">/ 02</div><h3>Tracked live</h3><p>The bar above reads that wallet straight from Solana. Nothing is typed in by hand.</p></div>
-      <div class="card hot"><div class="n">/ 03</div><h3>100% to ACCESS <span class="tagx">THE POINT</span></h3><p>Fees are converted to dollars and donated. Every gift is posted below with proof.</p></div>
+      <div class="card"><div class="n">/ 01</div><h3>Every trade pays a fee</h3><p>Each buy and sell on $ADAM pays a small creator fee, set by pump.fun.</p></div>
+      <div class="card"><div class="n">/ 02</div><h3>Routed on-chain</h3><p>pump.fun Charity Coins sends 100% of the creator fees to ACCESS through Donate.gg. We never hold the money.</p></div>
+      <div class="card hot"><div class="n">/ 03</div><h3>ACCESS claims it <span class="tagx">THE POINT</span></h3><p>The fees are claimed for ACCESS directly. The tracker above reads it live from Solana, and every claim is posted below.</p></div>
     </div>
   </section>
 
@@ -301,11 +301,11 @@ footer .logo{margin-bottom:14px}
 
   <section id="verify">
     <div class="label">Proof</div>
-    <h2 class="disp">Every donation, <em>on the record.</em></h2>
+    <h2 class="disp">Every claim, <em>on the record.</em></h2>
     <div class="ledger">
       <table>
         <thead><tr><th>Date</th><th>Amount</th><th>Transaction</th><th>Receipt</th></tr></thead>
-        <tbody id="ledgerBody"><tr><td colspan="4" class="empty">The first donation will appear here.</td></tr></tbody>
+        <tbody id="ledgerBody"><tr><td colspan="4" class="empty">The first claim will appear here.</td></tr></tbody>
       </table>
     </div>
   </section>
@@ -315,6 +315,7 @@ footer .logo{margin-bottom:14px}
     <a class="foot-x" id="xFoot" href="#" target="_blank" rel="noopener">Follow @helpsomeonefly on X ↗</a>
     <p id="consentLine"></p>
     <p>An independent community memorial. Not run by or affiliated with ACCESS, Retention.com, RB2B or any company Adam founded.</p>
+    <p>Creator fees are routed by pump.fun Charity Coins through Donate.gg, which converts them from SOL and charges a service fee before funds reach ACCESS.</p>
     <p>Not an investment. Crypto is volatile and can go to zero.</p>
   </footer>
 </div>
