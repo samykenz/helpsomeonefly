@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Help Someone Fly</title>
+<meta name="description" content="A community memorial for Adam, Helen, Emma and Charlie. 100% of creator fees go to Wings of Hope, tracked live on Solana.">
+<link rel="canonical" href="https://helpsomeonefly.com/">
+<meta property="og:title" content="Every trade helps someone fly">
+<meta property="og:description" content="100% of creator fees go to Wings of Hope, tracked live on Solana.">
+<meta property="og:url" content="https://helpsomeonefly.com/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23060a14'/><path d='M12 38 L52 22 L34 44 L30 36 Z' fill='%235fb4ff'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+/* Night sky palette: deep navy, sky blue, a touch of dawn */
+:root{
+  --bg:#060a14; --bg2:#0b1222; --card:rgba(255,255,255,.035); --line:rgba(255,255,255,.09);
+  --ink:#f3f6fb; --ink2:#a7b2c6; --muted:#6b7890;
+  --sky:#5fb4ff; --sky2:#bfe3ff; --dawn:#ffb27a; --live:#4ade80;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#f5f8fc; --bg2:#e9f0f9; --card:#ffffff; --line:#dbe3ee;
+    --ink:#0b1426; --ink2:#46546b; --muted:#7d8899;
+    --sky:#1f7ae0; --sky2:#7cc0ff; --dawn:#e8803c; --live:#16a34a;
+  }
+}
+:root[data-theme="light"]{
+  --bg:#f5f8fc; --bg2:#e9f0f9; --card:#ffffff; --line:#dbe3ee;
+  --ink:#0b1426; --ink2:#46546b; --muted:#7d8899;
+  --sky:#1f7ae0; --sky2:#7cc0ff; --dawn:#e8803c; --live:#16a34a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+.mono{font:500 .72rem/1.4 "JetBrains Mono",ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+@media(min-width:720px){.wrap{padding:0 32px}}
+
+/* sky backdrop */
+.sky{position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(120% 60% at 50% 115%, color-mix(in srgb,var(--dawn) 22%,transparent), transparent 60%),
+    radial-gradient(90% 60% at 50% -10%, color-mix(in srgb,var(--sky) 18%,transparent), transparent 65%),
+    var(--bg)}
+.sky::after{content:"";position:absolute;inset:0;opacity:.5;
+  background-image:radial-gradient(1px 1px at 12% 22%,#fff8 50%,transparent 51%),radial-gradient(1px 1px at 78% 14%,#fff6 50%,transparent 51%),radial-gradient(1px 1px at 34% 8%,#fff5 50%,transparent 51%),radial-gradient(1px 1px at 88% 40%,#fff4 50%,transparent 51%),radial-gradient(1px 1px at 58% 30%,#fff5 50%,transparent 51%),radial-gradient(1px 1px at 6% 52%,#fff4 50%,transparent 51%)}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]) .sky::after{display:none}}
+
+nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{font:800 1.15rem Inter;letter-spacing:-.01em;text-decoration:none}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--bg);text-decoration:none;font-weight:700;font-size:.92rem;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 10px 30px -8px color-mix(in srgb,var(--sky) 60%,transparent)}
+
+/* hero */
+.hero{text-align:center;padding:28px 0 20px}
+.eyebrow{color:var(--sky2)}
+h1{font:400 clamp(3rem,10vw,7rem)/.95 "Instrument Serif",serif;letter-spacing:-.02em;margin:20px 0 18px}
+h1 em{background:linear-gradient(90deg,var(--sky),var(--sky2) 60%,var(--dawn));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{max-width:560px;margin:0 auto;color:var(--ink2);font-size:1.1rem}
+.lead a{color:var(--ink);text-decoration-color:var(--sky);text-underline-offset:3px}
+
+/* tracker */
+.tracker{margin:36px auto 0;animation:rise 1s cubic-bezier(.22,1,.36,1) both;max-width:860px;padding:32px 22px;border:1px solid var(--line);border-radius:28px;background:var(--card);backdrop-filter:blur(18px);text-align:left;position:relative;
+  box-shadow:0 40px 120px -50px color-mix(in srgb,var(--sky) 55%,transparent)}
+@media(min-width:720px){.tracker{padding:44px 48px}}
+.t-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;color:var(--muted)}
+.live{display:inline-flex;align-items:center;gap:8px;color:var(--ink2)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--live);animation:pulse 2s infinite}
+.dot.off{background:var(--muted);animation:none}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--live) 60%,transparent)}70%{box-shadow:0 0 0 10px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.big{font:800 clamp(3rem,11vw,6.2rem)/1 Inter;letter-spacing:-.045em;font-variant-numeric:tabular-nums;margin-top:26px}
+.big-sub{color:var(--ink2);margin-top:10px;font-size:1.05rem}
+.big-sub b{color:var(--ink);font-weight:600}
+.bar{display:flex;height:16px;border-radius:999px;background:color-mix(in srgb,var(--ink) 7%,transparent);overflow:hidden;margin:30px 0 16px;transition:box-shadow .6s}
+.seg{height:100%;width:0;position:relative;transition:width 1.6s cubic-bezier(.22,1,.36,1)}
+.seg.sent{background:linear-gradient(90deg,var(--sky),var(--sky2))}
+.seg.pending{background:repeating-linear-gradient(-45deg,color-mix(in srgb,var(--dawn) 85%,transparent) 0 7px,color-mix(in srgb,var(--dawn) 45%,transparent) 7px 14px);background-size:40px 100%;animation:drift 1.4s linear infinite}
+.seg.sent::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.6) 50%,transparent 70%);background-size:220% 100%;animation:shine 3s linear infinite}
+@keyframes drift{to{background-position:40px 0}}
+@keyframes shine{from{background-position:160% 0}to{background-position:-60% 0}}
+.bar.glow{box-shadow:0 0 34px 2px color-mix(in srgb,var(--sky) 70%,transparent)}
+.legend{display:flex;gap:24px;flex-wrap:wrap;color:var(--ink2);font-size:.92rem}
+.legend b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px}
+.k-sent{background:var(--sky)}.k-pend{background:var(--dawn)}
+.bump{position:absolute;right:30px;top:78px;color:var(--live);font:600 .95rem "JetBrains Mono",monospace;opacity:0;pointer-events:none}
+.bump.go{animation:bump 2.6s ease forwards}
+@keyframes bump{15%{opacity:1;transform:translateY(-6px)}75%{opacity:1}100%{opacity:0;transform:translateY(-20px)}}
+.ca{display:flex;align-items:center;gap:10px;margin-top:28px;padding-top:22px;border-top:1px solid var(--line);flex-wrap:wrap}
+.ca .mono{color:var(--muted)}
+.ca code{flex:1;min-width:0;font:500 .85rem "JetBrains Mono",monospace;color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chip{background:none;border:1px solid var(--line);color:var(--ink2);border-radius:999px;padding:7px 14px;font:600 .8rem Inter;cursor:pointer;text-decoration:none}
+.chip:hover{color:var(--ink);border-color:var(--sky)}
+.notice{margin-top:14px;color:var(--muted);font-size:.86rem}
+
+/* sections */
+section{padding:110px 0 0}
+.kicker{color:var(--sky);margin-bottom:16px}
+h2{font:400 clamp(2.2rem,5.5vw,3.8rem)/1.05 "Instrument Serif",serif;letter-spacing:-.01em}
+.memorial{max-width:720px;margin:0 auto;text-align:center}
+.memorial p{color:var(--ink2);font-size:1.12rem;margin-top:20px}
+.names{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:30px}
+.names span{border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-weight:500;background:var(--card)}
+.also{color:var(--muted)!important;font-size:.95rem!important;margin-top:34px!important}
+.names-also{margin-top:14px}
+.pull{font:italic 400 clamp(1.6rem,4vw,2.4rem)/1.25 "Instrument Serif",serif;color:var(--ink);margin:34px auto 6px;max-width:620px}
+.pull cite{display:block;font-style:normal;color:var(--muted);margin-top:12px}
+.names-also span{color:var(--ink2);font-weight:400}
+.memorial .note{font-size:.98rem;color:var(--muted)}
+
+.steps{display:grid;gap:14px;margin-top:40px}
+@media(min-width:800px){.steps{grid-template-columns:repeat(3,1fr)}}
+.step{border:1px solid var(--line);border-radius:22px;padding:28px;background:var(--card)}
+.step .n{font:400 2.6rem/1 "Instrument Serif",serif;color:var(--sky)}
+.step h3{font-size:1.15rem;margin:16px 0 6px}
+.step p{color:var(--ink2);font-size:.96rem}
+
+.ledger{margin-top:36px;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:var(--card)}
+.ledger table{width:100%;border-collapse:collapse;font-size:.94rem}
+.ledger th,.ledger td{text-align:left;padding:16px 20px;border-bottom:1px solid var(--line)}
+.ledger th{color:var(--muted);font-weight:500}
+.ledger tr:last-child td{border-bottom:0}
+.ledger td a{color:var(--sky);text-decoration:none}
+.ledger .empty{color:var(--muted);text-align:center;padding:34px}
+@media(max-width:560px){.ledger th:nth-child(4),.ledger td:nth-child(4){display:none}}
+
+footer{margin-top:120px;border-top:1px solid var(--line);padding:40px 0 56px;color:var(--muted);font-size:.86rem}
+footer p+p{margin-top:8px}
+
+@keyframes rise{from{opacity:0;transform:translateY(24px)}}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="sky" aria-hidden="true"></div>
+
+<div class="wrap">
+  <nav>
+    <a class="logo" href="#top" data-cfg="ticker">$TICKER</a>
+    <a class="btn" id="buyBtn" href="#">Buy <span data-cfg="ticker">$TICKER</span></a>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="mono eyebrow">In memory of Adam, Helen, Emma &amp; Charlie</div>
+    <h1>Every trade<br><em>helps someone fly.</em></h1>
+    <p class="lead">100% of creator fees go to <a href="https://wingsofhope.ngo" target="_blank" rel="noopener">Wings of Hope</a>, the aviation charity that flies patients to care and brings young people into flight.</p>
+
+    <div class="tracker" id="tracker">
+      <span class="bump" id="bump"></span>
+      <div class="t-top mono">
+        <span class="live"><span class="dot" id="dot"></span><span id="status">Connecting…</span></span>
+        <span>Updated <span id="updated">—</span></span>
+      </div>
+      <div class="big" id="raised">$0.00</div>
+      <div class="big-sub">raised for Wings of Hope · <b id="totalSol">0 SOL</b> in fees</div>
+      <div class="bar" id="bar" role="img" aria-label="Donated vs waiting to be sent">
+        <div class="seg sent" id="segSent"></div>
+        <div class="seg pending" id="segPend"></div>
+      </div>
+      <div class="legend">
+        <span><i class="k-sent"></i>Donated <b id="lSent">$0</b></span>
+        <span><i class="k-pend"></i>Next donation <b id="lPend">$0</b></span>
+      </div>
+      <div class="ca">
+        <span class="mono">CA</span>
+        <code id="ca">Coming soon</code>
+        <button class="chip" id="copyBtn">Copy</button>
+        <a class="chip" id="walletLink" href="#" target="_blank" rel="noopener">Fee wallet ↗</a>
+      </div>
+      <p class="notice" id="notice"></p>
+    </div>
+  </header>
+
+  <section class="memorial">
+    <div class="mono kicker">In memory</div>
+    <h2>A builder, a mother, and the light of their lives.</h2>
+    <p>Adam Robinson built Retention.com and RB2B in Austin and shared everything he learned with other founders. His wife, Helen Sharp, led Influential PR and had just started a ceramics company. Their families remember them as devoted parents, and Emma and Charlie as the light of their lives.</p>
+    <blockquote class="pull">“Helen and Adam were the love affair that will last forever.”<cite class="mono">From the families' statement</cite></blockquote>
+    <p>On November 1, 2026, their flight went down near Greenacres, Florida. Nine people were lost. This fund turns every trade into something that keeps others flying.</p>
+    <div class="names"><span>Adam Robinson</span><span>Helen Sharp</span><span>Emma, 4</span><span>Charlie, 2</span></div>
+    <p class="also">Also lost aboard</p>
+    <div class="names names-also"><span>Rachael Reed</span><span>Charmi Fehr</span><span>Anita Maria Cetina</span><span>and the two pilots</span></div>
+    <p class="note">Rachael and Charmi were “full of joy and adventure.” Anita Maria cared for Emma and Charlie “with tenderness and devotion, and she was truly part of the family.” Our hearts are also with the families of the pilots.</p>
+  </section>
+
+  <section>
+    <div class="mono kicker">How it works</div>
+    <h2 >Trade. Fees build. We donate.</h2>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h3>Every trade pays a fee</h3><p>Each buy and sell sends a small creator fee to one public wallet.</p></div>
+      <div class="step"><div class="n">2</div><h3>Tracked live</h3><p>The bar above reads that wallet straight from Solana. Nothing is typed in by hand.</p></div>
+      <div class="step"><div class="n">3</div><h3>100% to Wings of Hope</h3><p>Fees are converted to dollars and donated. Every gift is posted below with proof.</p></div>
+    </div>
+  </section>
+
+  <section id="verify">
+    <div class="mono kicker">Proof</div>
+    <h2 >Every donation, on the record.</h2>
+    <div class="ledger">
+      <table>
+        <thead><tr><th>Date</th><th>Amount</th><th>Transaction</th><th>Receipt</th></tr></thead>
+        <tbody id="ledgerBody"><tr><td colspan="4" class="empty">The first donation will appear here.</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <p id="consentLine"></p>
+    <p>An independent community memorial. Not run by or affiliated with Wings of Hope, Retention.com or RB2B.</p>
+    <p>Not an investment. Crypto is volatile and can go to zero.</p>
+  </footer>
+</div>
+
+<script>
+/* ===================== CONFIG — edit this ===================== */
+const CONFIG = {
+  ticker: "$TICKER",
+  buyUrl: "#",                     // pump.fun / DEX link
+  contract: "",                    // token CA
+  feeWallet: "",                   // public Solana wallet that receives creator fees
+  consent: "",                     // e.g. "Shared with the blessing of the Robinson and Sharp families."
+  // Every donation sent. sol = amount, tx = Solana signature, receipt = Wings of Hope receipt link.
+  donations: [
+    // { date: "2026-11-10", sol: 12.5, tx: "5abc...", receipt: "https://..." },
+  ],
+  rpc: "https://solana-rpc.publicnode.com",   // swap for a Helius URL at launch
+  refreshSec: 30
+};
+/* ============================================================== */
+
+const $ = id => document.getElementById(id);
+const usd = n => "$" + n.toLocaleString("en-US",{maximumFractionDigits: n < 1000 ? 2 : 0, minimumFractionDigits: n < 1000 ? 2 : 0});
+const sol = n => n.toLocaleString(undefined,{maximumFractionDigits:3}) + " SOL";
+
+document.querySelectorAll("[data-cfg]").forEach(el => { const v = CONFIG[el.dataset.cfg]; if (v) el.textContent = v; });
+$("buyBtn").href = CONFIG.buyUrl;
+if (CONFIG.contract) $("ca").textContent = CONFIG.contract;
+if (CONFIG.consent) $("consentLine").textContent = CONFIG.consent;
+if (CONFIG.feeWallet) $("walletLink").href = "https://solscan.io/account/" + CONFIG.feeWallet;
+else $("walletLink").style.display = "none";
+$("copyBtn").onclick = () => {
+  if (!CONFIG.contract) return;
+  navigator.clipboard?.writeText(CONFIG.contract);
+  $("copyBtn").textContent = "Copied"; setTimeout(() => $("copyBtn").textContent = "Copy", 1400);
+};
+
+const donatedSol = CONFIG.donations.reduce((s,t) => s + t.sol, 0);
+if (CONFIG.donations.length) {
+  $("ledgerBody").innerHTML = CONFIG.donations.slice().reverse().map(t =>
+    `<tr><td>${t.date}</td><td>${sol(t.sol)}</td><td><a href="https://solscan.io/tx/${t.tx}" target="_blank" rel="noopener">${t.tx.slice(0,6)}…${t.tx.slice(-4)} ↗</a></td><td>${t.receipt ? `<a href="${t.receipt}" target="_blank" rel="noopener">View ↗</a>` : "—"}</td></tr>`).join("");
+}
+
+let shown = 0;
+function animateTo(target){
+  const start = shown, t0 = performance.now(), dur = 1600;
+  const step = now => {
+    const k = Math.min(1,(now - t0)/dur), e = 1 - Math.pow(1-k,4);
+    shown = start + (target - start) * e;
+    $("raised").textContent = usd(shown);
+    if (k < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+async function rpcBalance(addr){
+  const r = await fetch(CONFIG.rpc,{method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({jsonrpc:"2.0",id:1,method:"getBalance",params:[addr,{commitment:"confirmed"}]})});
+  const j = await r.json(); if (j.error) throw new Error(j.error.message);
+  return j.result.value / 1e9;
+}
+async function solPrice(){
+  const r = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd");
+  return (await r.json()).solana.usd;
+}
+
+function setStatus(live, text, note=""){
+  $("dot").classList.toggle("off", !live);
+  $("status").textContent = text;
+  $("notice").textContent = note;
+}
+
+// new fees arriving: float "+X SOL" and light up the bar
+function celebrate(deltaSol){
+  const b = $("bump"); b.textContent = "+" + sol(deltaSol);
+  b.classList.remove("go"); void b.offsetWidth; b.classList.add("go");
+  $("bar").classList.add("glow"); setTimeout(() => $("bar").classList.remove("glow"), 1400);
+}
+
+let lastPrice = 0, lastBal = null;
+async function refresh(){
+  if (!CONFIG.feeWallet) {
+    setStatus(false, "Goes live at launch", "The tracker starts the moment the fee wallet is added. No fake numbers before then.");
+    return;
+  }
+  try {
+    const [bal, price] = await Promise.all([rpcBalance(CONFIG.feeWallet), solPrice().catch(() => lastPrice)]);
+    if (price) lastPrice = price;
+    if (lastBal !== null && bal > lastBal + 1e-6) celebrate(bal - lastBal);
+    lastBal = bal;
+    const totalSol = bal + donatedSol;
+    // the bar is the whole fund: blue = already donated, orange = waiting for the next donation
+    const sentPct = totalSol ? donatedSol / totalSol * 100 : 0;
+    $("segSent").style.width = sentPct + "%";
+    $("segPend").style.width = (totalSol ? 100 - sentPct : 0) + "%";
+    $("totalSol").textContent = sol(totalSol);
+    $("lSent").textContent = usd(donatedSol * lastPrice);
+    $("lPend").textContent = usd(bal * lastPrice);
+    $("updated").textContent = new Date().toLocaleTimeString([], {hour:"2-digit",minute:"2-digit",second:"2-digit"});
+    animateTo(totalSol * lastPrice);
+    setStatus(true, "Live from Solana");
+  } catch (e) {
+    setStatus(false, "Reconnecting…", "Couldn't reach Solana. Retrying shortly.");
+  }
+}
+refresh();
+setInterval(refresh, CONFIG.refreshSec * 1000);
+
+</script>
+</body>
+</html>
