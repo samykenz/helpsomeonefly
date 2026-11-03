@@ -163,6 +163,17 @@ h2 em{font-style:normal;color:var(--coral)}
 .navx:hover{color:var(--coral);border-color:var(--line)}
 .nav-r{display:flex;gap:10px;align-items:center}
 .foot-x{display:inline-block;color:var(--coral);text-decoration:none;font-weight:700;margin-bottom:14px}
+/* charity */
+.char-in{padding:36px 24px}
+@media(min-width:760px){.char-in{padding:48px 56px}}
+.char-in > p{color:var(--ink2);max-width:700px}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:30px}
+@media(min-width:860px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stat{border:1.5px dashed var(--line);padding:20px;background:var(--bg)}
+.stat b{display:block;font:700 clamp(1.8rem,4vw,2.6rem)/1 "Pixelify Sans",monospace;color:var(--coral)}
+.stat span{display:block;color:var(--ink2);font-size:.82rem;margin-top:10px;line-height:1.5}
+.src{color:var(--muted);font-size:.76rem;margin-top:14px}
+.src a{color:var(--ink2)}
 footer{margin-top:120px;border-top:1px solid var(--soft);padding:36px 0 52px;color:var(--muted);font-size:.8rem}
 footer p+p{margin-top:8px}
 footer .logo{margin-bottom:14px}
@@ -172,7 +183,7 @@ footer .logo{margin-bottom:14px}
 <body>
 <div class="top"><div class="wrap"><nav>
   <a class="logo" href="#top"><span data-cfg="ticker">$ADAM</span><span class="cur"></span></a>
-  <div class="links"><a href="#memory">in memory</a><a href="#how">how it works</a><a href="#buy">how to buy</a><a href="#verify">proof</a></div>
+  <div class="links"><a href="#memory">in memory</a><a href="#charity">the charity</a><a href="#how">how it works</a><a href="#buy">how to buy</a><a href="#verify">proof</a></div>
   <div class="nav-r"><a class="navx" id="xNav" href="#" target="_blank" rel="noopener">X ↗</a><a class="btn sm" href="#buy">buy <span data-cfg="ticker">$ADAM</span> ›</a></div>
 </nav></div></div>
 
@@ -234,6 +245,28 @@ footer .logo{margin-bottom:14px}
         <p class="also-l">Also lost aboard</p>
         <div class="names also"><span>Rachael Reed</span><span>Charmi Fehr</span><span>Anita Maria Cetina</span><span>and the two pilots</span></div>
         <p class="note">Rachael and Charmi were “full of joy and adventure.” Anita Maria cared for Emma and Charlie “with tenderness and devotion, and she was truly part of the family.” Our hearts are also with the families of the pilots.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="charity">
+    <div class="label">Where the fees go</div>
+    <h2 class="disp">Meet <em>Wings of Hope.</em></h2>
+    <div class="win" style="margin-top:30px">
+      <div class="bar-t"><i></i><i></i><i></i><span>wings-of-hope.txt</span></div>
+      <div class="char-in">
+        <p>Wings of Hope is a St. Louis aviation nonprofit that has been flying since the 1960s. Volunteer pilots and medics fly patients to specialized care across the U.S. for free, and the charity supports medical and humanitarian aviation in communities around the world. It also runs STEM and aviation programs for young people.</p>
+        <div class="stats">
+          <div class="stat"><b>62,293</b><span>people served worldwide in 2023</span></div>
+          <div class="stat"><b>1 flight</b><span>to critical care, every 2 days</span></div>
+          <div class="stat"><b>9</b><span>countries where they work</span></div>
+          <div class="stat"><b>86¢</b><span>of every dollar spent on programs</span></div>
+        </div>
+        <div class="buy-ctas" style="margin-top:28px">
+          <a class="btn lg" href="https://wingsofhope.ngo" target="_blank" rel="noopener">Visit Wings of Hope ↗</a>
+          <a class="btn lg ghost" href="https://img.wingsofhope.ngo/About%20Us/woh_2023_annual_report.pdf" target="_blank" rel="noopener">2023 annual report ↗</a>
+        </div>
+        <p class="src">Figures from Wings of Hope's 2023 annual report. You can also give to them directly on their site.</p>
       </div>
     </div>
   </section>
