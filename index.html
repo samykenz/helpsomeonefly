@@ -431,6 +431,7 @@ renderLedger();
 
 let shown = 0;
 function animateTo(target){
+  if (document.hidden) { shown = target; $("raised").textContent = usd(target); return; }
   const start = shown, t0 = performance.now(), dur = 1600;
   const step = now => {
     const k = Math.min(1,(now - t0)/dur), e = 1 - Math.pow(1-k,4);
