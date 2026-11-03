@@ -55,10 +55,11 @@ a{color:inherit}
 nav{display:flex;align-items:center;justify-content:space-between;height:72px}
 .logo{font:800 1.15rem Inter;letter-spacing:-.01em;text-decoration:none}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--bg);text-decoration:none;font-weight:700;font-size:.92rem;transition:transform .2s,box-shadow .2s}
-.ca-pill{display:inline-flex;align-items:center;gap:12px;min-width:0;max-width:min(460px,64vw);padding:11px 16px;border:1px solid var(--line);border-radius:12px;background:var(--card);backdrop-filter:blur(12px);color:var(--ink2);cursor:pointer;font:inherit;transition:border-color .2s,box-shadow .2s}
+#buy{scroll-margin-top:24px}
+.ca-pill{display:flex;align-items:center;gap:14px;margin-top:28px;width:fit-content;max-width:100%;padding:16px 20px;border:1px solid var(--line);border-radius:12px;background:var(--card);backdrop-filter:blur(12px);color:var(--ink2);cursor:pointer;font:inherit;transition:border-color .2s,box-shadow .2s}
 .ca-pill:hover{border-color:color-mix(in srgb,var(--sky) 60%,transparent);box-shadow:0 10px 30px -12px color-mix(in srgb,var(--sky) 60%,transparent)}
 .ca-pill .k{color:var(--sky);flex:none}
-.ca-pill code{font:500 .8rem/1.4 "JetBrains Mono",ui-monospace,monospace;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.ca-pill code{font:500 .9rem/1.4 "JetBrains Mono",ui-monospace,monospace;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
 .ca-pill .cp{color:var(--muted);flex:none;transition:color .2s}
 .ca-pill:hover .cp{color:var(--ink)}
 nav{gap:16px}
@@ -150,7 +151,7 @@ footer p+p{margin-top:8px}
 <div class="wrap">
   <nav>
     <a class="logo" href="#top" data-cfg="ticker">$ADAM</a>
-    <button class="ca-pill" id="navCa" type="button" aria-label="Copy contract address"><span class="mono k">CA</span><code id="navCaAddr">Coming soon</code><span class="mono cp" id="navCopy">Copy</span></button>
+    <a class="btn" href="#buy">Buy <span data-cfg="ticker">$ADAM</span></a>
   </nav>
 
   <header class="hero" id="top">
@@ -206,6 +207,12 @@ footer p+p{margin-top:8px}
     </div>
   </section>
 
+  <section id="buy">
+    <div class="mono kicker">How to buy</div>
+    <h2>Get <span data-cfg="ticker">$ADAM</span></h2>
+    <button class="ca-pill" id="buyCa" type="button" aria-label="Copy contract address"><span class="mono k">CA</span><code id="buyCaAddr">Coming soon</code><span class="mono cp" id="buyCopy">Copy</span></button>
+  </section>
+
   <section id="verify">
     <div class="mono kicker">Proof</div>
     <h2 >Every donation, on the record.</h2>
@@ -245,7 +252,7 @@ const usd = n => "$" + n.toLocaleString("en-US",{maximumFractionDigits: n < 1000
 const sol = n => n.toLocaleString(undefined,{maximumFractionDigits:3}) + " SOL";
 
 document.querySelectorAll("[data-cfg]").forEach(el => { const v = CONFIG[el.dataset.cfg]; if (v) el.textContent = v; });
-if (CONFIG.contract) { $("ca").textContent = CONFIG.contract; $("navCaAddr").textContent = CONFIG.contract; }
+if (CONFIG.contract) { $("ca").textContent = CONFIG.contract; $("buyCaAddr").textContent = CONFIG.contract; }
 if (CONFIG.consent) $("consentLine").textContent = CONFIG.consent;
 if (CONFIG.feeWallet) $("walletLink").href = "https://solscan.io/account/" + CONFIG.feeWallet;
 else $("walletLink").style.display = "none";
@@ -255,7 +262,7 @@ function copyCA(label){
   label.textContent = "Copied"; setTimeout(() => label.textContent = "Copy", 1400);
 }
 $("copyBtn").onclick = () => copyCA($("copyBtn"));
-$("navCa").onclick = () => copyCA($("navCopy"));
+$("buyCa").onclick = () => copyCA($("buyCopy"));
 
 const donatedSol = CONFIG.donations.reduce((s,t) => s + t.sol, 0);
 if (CONFIG.donations.length) {
