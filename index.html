@@ -138,6 +138,31 @@ h2 em{font-style:normal;color:var(--coral)}
 .ledger .empty{color:var(--muted);text-align:center;padding:34px}
 @media(max-width:560px){.ledger th:nth-child(4),.ledger td:nth-child(4){display:none}}
 
+/* how to buy */
+.buy-win{margin-top:0}
+.buy-in{padding:40px 24px}
+@media(min-width:760px){.buy-in{padding:60px 56px}}
+.buy-h{font-size:clamp(3rem,10vw,6rem);color:var(--ink);margin-top:14px}
+.buy-h em{font-style:normal;color:var(--coral)}
+.buy-sub{color:var(--ink2);font-size:1.05rem;margin-top:16px;max-width:620px}
+.ca-big{display:flex;align-items:center;gap:16px;width:100%;margin-top:34px;padding:22px 22px;border:2px solid var(--coral);background:#120e0d;cursor:pointer;font:inherit;color:var(--ink);text-align:left;transition:background .15s,box-shadow .2s}
+.ca-big:hover{background:#1a1311;box-shadow:0 0 0 4px rgba(244,128,93,.18)}
+.ca-big .k{color:var(--coral);flex:none;font-size:.85rem}
+.ca-big code{flex:1;min-width:0;font:600 clamp(.85rem,2.2vw,1.25rem) "JetBrains Mono",monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ca-big .cp{flex:none;background:var(--coral);color:#120d0b;font:800 .85rem "JetBrains Mono",monospace;letter-spacing:.1em;text-transform:uppercase;padding:12px 20px}
+.buy-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:18px}
+.btn.lg{padding:16px 26px;font-size:.95rem}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn.ghost:hover{background:var(--panel2)}
+.buy-steps{display:grid;gap:14px;margin-top:44px}
+@media(min-width:860px){.buy-steps{grid-template-columns:repeat(4,1fr)}}
+.buy-steps .card{background:var(--panel)}
+.buy-steps .card.hot{background:var(--coral)}
+.buy-steps .card h3{font-size:1.25rem}
+.navx{color:var(--ink2);text-decoration:none;font-weight:800;font-size:.8rem;border:1px solid var(--soft);padding:6px 12px;border-radius:2px}
+.navx:hover{color:var(--coral);border-color:var(--line)}
+.nav-r{display:flex;gap:10px;align-items:center}
+.foot-x{display:inline-block;color:var(--coral);text-decoration:none;font-weight:700;margin-bottom:14px}
 footer{margin-top:120px;border-top:1px solid var(--soft);padding:36px 0 52px;color:var(--muted);font-size:.8rem}
 footer p+p{margin-top:8px}
 footer .logo{margin-bottom:14px}
@@ -148,7 +173,7 @@ footer .logo{margin-bottom:14px}
 <div class="top"><div class="wrap"><nav>
   <a class="logo" href="#top"><span data-cfg="ticker">$ADAM</span><span class="cur"></span></a>
   <div class="links"><a href="#memory">in memory</a><a href="#how">how it works</a><a href="#buy">how to buy</a><a href="#verify">proof</a></div>
-  <a class="btn sm" href="#buy">buy <span data-cfg="ticker">$ADAM</span> ›</a>
+  <div class="nav-r"><a class="navx" id="xNav" href="#" target="_blank" rel="noopener">X ↗</a><a class="btn sm" href="#buy">buy <span data-cfg="ticker">$ADAM</span> ›</a></div>
 </nav></div></div>
 
 <div class="wrap">
@@ -224,9 +249,25 @@ footer .logo{margin-bottom:14px}
   </section>
 
   <section id="buy">
-    <div class="label">How to buy</div>
-    <h2 class="disp">Get <em data-cfg="ticker">$ADAM</em></h2>
-    <button class="ca-pill" id="buyCa" type="button" aria-label="Copy contract address"><span class="label k">CA</span><code id="buyCaAddr">Coming soon</code><span class="label cp" id="buyCopy">Copy</span></button>
+    <div class="win buy-win">
+      <div class="bar-t"><i></i><i></i><i></i><span>buy.sh</span></div>
+      <div class="buy-in">
+        <div class="label">How to buy</div>
+        <h2 class="disp buy-h">Get <em data-cfg="ticker">$ADAM</em></h2>
+        <p class="buy-sub">Every buy sends a fee to Wings of Hope. Copy the contract address below and you're one swap away.</p>
+        <button class="ca-big" id="buyCa" type="button" aria-label="Copy contract address"><span class="label k">CA</span><code id="buyCaAddr">Coming soon</code><span class="cp" id="buyCopy">Copy</span></button>
+        <div class="buy-ctas">
+          <a class="btn lg" id="pumpLink" href="#" target="_blank" rel="noopener">Buy on pump.fun ›</a>
+          <a class="btn lg ghost" id="xBuy" href="#" target="_blank" rel="noopener">Follow on X ↗</a>
+        </div>
+        <div class="buy-steps">
+          <div class="card"><div class="n">/ 01</div><h3>Get a wallet</h3><p>Download Phantom or Solflare. Save your recovery phrase somewhere safe.</p></div>
+          <div class="card"><div class="n">/ 02</div><h3>Add SOL</h3><p>Buy SOL in the wallet, or send it from an exchange like Coinbase.</p></div>
+          <div class="card hot"><div class="n">/ 03</div><h3>Copy the CA</h3><p>Use the address above. Always check it matches before you buy.</p></div>
+          <div class="card"><div class="n">/ 04</div><h3>Swap</h3><p>Paste the CA into pump.fun or your wallet's swap, then confirm.</p></div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section id="verify">
@@ -242,6 +283,7 @@ footer .logo{margin-bottom:14px}
 
   <footer>
     <a class="logo" href="#top"><span data-cfg="ticker">$ADAM</span><span class="cur"></span></a>
+    <a class="foot-x" id="xFoot" href="#" target="_blank" rel="noopener">Follow @helpsomeonefly on X ↗</a>
     <p id="consentLine"></p>
     <p>An independent community memorial. Not run by or affiliated with Wings of Hope, Retention.com, RB2B or any company Adam founded.</p>
     <p>Not an investment. Crypto is volatile and can go to zero.</p>
@@ -253,6 +295,8 @@ footer .logo{margin-bottom:14px}
 const CONFIG = {
   ticker: "$ADAM",
   contract: "ADAMxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxpump", // PLACEHOLDER: swap for the real token CA
+  x: "https://x.com/helpsomeonefly",
+  buyUrl: "",                      // pump.fun link for the token (button hides until set)
   feeWallet: "",                   // public Solana wallet that receives creator fees
   consent: "",                     // e.g. "Shared with the blessing of the Robinson and Sharp families."
   // Every donation sent. sol = amount, tx = Solana signature, receipt = Wings of Hope receipt link.
@@ -270,6 +314,8 @@ const sol = n => n.toLocaleString(undefined,{maximumFractionDigits:3}) + " SOL";
 
 document.querySelectorAll("[data-cfg]").forEach(el => { const v = CONFIG[el.dataset.cfg]; if (v) el.textContent = v; });
 if (CONFIG.contract) { $("ca").textContent = CONFIG.contract; $("buyCaAddr").textContent = CONFIG.contract; }
+["xNav","xBuy","xFoot"].forEach(id => { if (CONFIG.x) $(id).href = CONFIG.x; else $(id).style.display = "none"; });
+if (CONFIG.buyUrl) $("pumpLink").href = CONFIG.buyUrl; else $("pumpLink").style.display = "none";
 if (CONFIG.consent) $("consentLine").textContent = CONFIG.consent;
 if (CONFIG.feeWallet) $("walletLink").href = "https://solscan.io/account/" + CONFIG.feeWallet;
 else $("walletLink").style.display = "none";
