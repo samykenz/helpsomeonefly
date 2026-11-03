@@ -185,7 +185,7 @@ footer .logo{margin-bottom:14px}
 <body>
 <div class="top"><div class="wrap"><nav>
   <a class="logo" href="#top"><span data-cfg="ticker">$ADAM</span><span class="cur"></span></a>
-  <div class="links"><a href="#memory">in memory</a><a href="#charity">the charity</a><a href="#how">how it works</a><a href="#buy">how to buy</a><a href="#verify">proof</a></div>
+  <div class="links"><a href="#memory">in memory</a><a href="#charity">the charity</a><a href="#how">how it works</a><a href="#buy">how to buy</a></div>
   <div class="nav-r"><a class="navx" id="xNav" href="#" target="_blank" rel="noopener">X ↗</a><a class="btn sm" href="#buy">buy <span data-cfg="ticker">$ADAM</span> ›</a></div>
 </nav></div></div>
 
@@ -199,7 +199,7 @@ footer .logo{margin-bottom:14px}
           <div class="label">In memory of Adam, Helen, Emma &amp; Charlie</div>
           <h1 class="disp">Every trade helps <b>a family heal.</b></h1>
           <p class="lead">100% of creator fees are routed to <a href="https://www.accesshelp.org/" target="_blank" rel="noopener">ACCESS</a>, the nonprofit that pairs families who lost loved ones in plane crashes with grief mentors who have lived through the same loss. Tracked live on Solana.</p>
-          <div class="cta"><a class="btn" href="#buy">buy <span data-cfg="ticker">$ADAM</span> ›</a><span>100% of creator fees to ACCESS | claimed on-chain</span></div>
+          <div class="cta"><a class="btn" href="#buy">buy <span data-cfg="ticker">$ADAM</span> ›</a><span>100% of creator fees to ACCESS | tracked live on Solana</span></div>
         </div>
       </div>
     </div>
@@ -215,14 +215,6 @@ footer .logo{margin-bottom:14px}
         </div>
         <div class="big disp" id="raised">$0.00</div>
         <div class="big-sub">in creator fees for ACCESS · <b id="totalSol">0 SOL</b> total</div>
-        <div class="bar" id="bar" role="img" aria-label="Claimed by ACCESS vs waiting to be claimed">
-          <div class="seg sent" id="segSent"></div>
-          <div class="seg pending" id="segPend"></div>
-        </div>
-        <div class="legend">
-          <span><i class="k-sent"></i>claimed by ACCESS <b id="lSent">$0</b></span>
-          <span><i class="k-pend"></i>waiting to be claimed <b id="lPend">$0</b></span>
-        </div>
         <div class="ca">
           <span class="label">CA</span>
           <code id="ca">Coming soon</code>
@@ -269,11 +261,11 @@ footer .logo{margin-bottom:14px}
 
   <section id="how">
     <div class="label">How it works</div>
-    <h2 class="disp">Trade. Fees build. <em>ACCESS claims.</em></h2>
+    <h2 class="disp">Trade. Fees build. <em>ACCESS benefits.</em></h2>
     <div class="cards">
       <div class="card"><div class="n">/ 01</div><h3>Every trade pays a fee</h3><p>Each buy and sell on $ADAM pays a small creator fee, set by pump.fun.</p></div>
       <div class="card"><div class="n">/ 02</div><h3>Routed on-chain</h3><p>pump.fun Charity Coins sends 100% of the creator fees to ACCESS through Donate.gg. We never hold the money.</p></div>
-      <div class="card hot"><div class="n">/ 03</div><h3>ACCESS claims it <span class="tagx">THE POINT</span></h3><p>The fees are claimed for ACCESS directly. The tracker above reads it live from Solana, and every claim is posted below.</p></div>
+      <div class="card hot"><div class="n">/ 03</div><h3>100% to ACCESS <span class="tagx">THE POINT</span></h3><p>Every creator fee goes to ACCESS, automatically. The tracker above reads the total live from Solana.</p></div>
     </div>
   </section>
 
@@ -299,17 +291,6 @@ footer .logo{margin-bottom:14px}
     </div>
   </section>
 
-  <section id="verify">
-    <div class="label">Proof</div>
-    <h2 class="disp">Every claim, <em>on the record.</em></h2>
-    <div class="ledger">
-      <table>
-        <thead><tr><th>Date</th><th>Amount</th><th>Transaction</th><th>Claimed by</th></tr></thead>
-        <tbody id="ledgerBody"><tr><td colspan="4" class="empty">The first claim will appear here.</td></tr></tbody>
-      </table>
-    </div>
-  </section>
-
   <footer>
     <a class="logo" href="#top"><span data-cfg="ticker">$ADAM</span><span class="cur"></span></a>
     <a class="foot-x" id="xFoot" href="#" target="_blank" rel="noopener">Follow @helpsomeonefly on X ↗</a>
@@ -331,7 +312,7 @@ const CONFIG = {
   fees: {
     bondingCurve: "6FP3DVEky4e2oDFTtpqxKkhqH1aKq6YGSM5QR81zdmFA",   // holds creator fees not yet swept (0.30% of each trade)
     feeVault:     "2n6PEawSddT4z5uUtxXDvhh5AVbzts7rhDgqQCmQLHDS",   // the coin's creator-fee vault (fee-sharing config 6DP13q...)
-    charity:      "6NpaQ6Nrq5NVz3qXHCKcTyMtBuXxpWJT7uoyoxadGbAQ",   // 100% shareholder: the $ADAM charity account Donate.gg claims from
+    charity:      "6NpaQ6Nrq5NVz3qXHCKcTyMtBuXxpWJT7uoyoxadGbAQ",   // 100% shareholder: the $ADAM charity account
     charityRent:  1757680                                          // lamports locked in the charity account for rent (not fees)
   },
   consent: "",                     // e.g. "Shared with the blessing of the Robinson and Sharp families."
@@ -384,7 +365,8 @@ function pendingFromCurve(b64){
   return Number(new DataView(bytes.buffer).getBigUint64(125, true));
 }
 
-// Claims history of the charity account: every lamport that left it was claimed for ACCESS.
+// Fees that have already left the charity account still count toward the lifetime total,
+// so we keep a running sum of them (cached per visitor) and the total never goes down.
 const CACHE_KEY = "adamFeeClaims_v1_" + CONFIG.fees.charity;
 function loadCache(){ try { return JSON.parse(localStorage.getItem(CACHE_KEY)) || null; } catch(e) { return null; } }
 function saveCache(c){ try { localStorage.setItem(CACHE_KEY, JSON.stringify(c)); } catch(e) {} }
@@ -420,14 +402,6 @@ async function syncClaims(){
   saveCache(claims);
 }
 
-function renderLedger(){
-  if (!claims.list.length) return;
-  $("ledgerBody").innerHTML = claims.list.slice(0, 50).map(c => {
-    const d = new Date(c.t * 1000).toLocaleDateString("en-US", {month:"short", day:"numeric", year:"numeric"});
-    return `<tr><td>${d}</td><td>${sol(c.lamports / LAMPORTS)}</td><td><a href="https://solscan.io/tx/${c.sig}" target="_blank" rel="noopener">${c.sig.slice(0,6)}…${c.sig.slice(-4)} ↗</a></td><td>Donate.gg → ACCESS</td></tr>`;
-  }).join("");
-}
-renderLedger();
 
 let shown = 0;
 function animateTo(target){
@@ -452,7 +426,6 @@ function setStatus(live, text, note=""){
 function celebrate(deltaSol){
   const b = $("bump"); b.textContent = "+" + sol(deltaSol);
   b.classList.remove("go"); void b.offsetWidth; b.classList.add("go");
-  $("bar").classList.add("glow"); setTimeout(() => $("bar").classList.remove("glow"), 1400);
 }
 
 let lastPrice = 0, lastTotal = null, busy = false;
@@ -473,18 +446,12 @@ async function refresh(){
     const pending = curve && curve.value ? pendingFromCurve(curve.value.data[0]) : 0;
     const waitingL = pending + (vault.value || 0) + Math.max(0, (charity.value || 0) - F.charityRent);
     const totalL = waitingL + claims.claimed;
-    const total = totalL / LAMPORTS, claimed = claims.claimed / LAMPORTS, waiting = waitingL / LAMPORTS;
+    const total = totalL / LAMPORTS;
     if (lastTotal !== null && total > lastTotal + 1e-6) celebrate(total - lastTotal);
     lastTotal = total;
-    const claimedPct = total ? claimed / total * 100 : 0;
-    $("segSent").style.width = claimedPct + "%";
-    $("segPend").style.width = (total ? 100 - claimedPct : 0) + "%";
     $("totalSol").textContent = sol(total);
-    $("lSent").textContent = usd(claimed * lastPrice);
-    $("lPend").textContent = usd(waiting * lastPrice);
     $("updated").textContent = new Date().toLocaleTimeString([], {hour:"2-digit",minute:"2-digit",second:"2-digit"});
     animateTo(total * lastPrice);
-    renderLedger();
     setStatus(true, "Live from Solana", lastPrice ? "" : "Couldn't load the SOL price, so dollar amounts are paused. The SOL total is live.");
   } catch (e) {
     setStatus(false, "Reconnecting…", "Couldn't reach Solana. Retrying shortly.");
